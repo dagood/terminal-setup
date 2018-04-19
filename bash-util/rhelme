@@ -2,5 +2,5 @@
 
 export netargs='--network none'
 export containerdescription='offline container'
-rhelmenet
+rhelnetme
 
