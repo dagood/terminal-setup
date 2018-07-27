@@ -92,3 +92,22 @@ function ConvertFrom-Base36
     }
     $decNum
 }
+
+function Redact-History
+{
+    $history = (Get-PSReadlineOption).HistorySavePath
+    $historyBkp = "$history.bak.txt"
+
+    echo "Enter string to redact from $history"
+    $s = Read-Host
+
+    if ($s)
+    {
+        echo "Redacting..."
+        # Powershell has the history file open at this point: shuffle it around to get access.
+        mv -Force $history $historyBkp
+        gc $historyBkp | %{ $_.Replace($s, "******") } | sc $history
+        rm $historyBkp
+        echo "Done."
+    }
+}
