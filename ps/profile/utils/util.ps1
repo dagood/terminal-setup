@@ -6,6 +6,22 @@ function Diff-Time($a, $b)
     $a - $b
 }
 
+function ConvertTo-PacificTime($t)
+{
+    [System.TimeZoneInfo]::ConvertTime(
+        (get-date $t),
+        (Get-TimeZone 'Pacific Standard Time')
+    )
+}
+
+function ConvertTo-CentralTime($t)
+{
+    [System.TimeZoneInfo]::ConvertTime(
+        (get-date $t),
+        (Get-TimeZone 'Central Standard Time')
+    )
+}
+
 function ConvertFrom-BuildNumber($num) { $date = (Get-Date '1996-4-1').AddMonths([Math]::Floor($num / 100)); $day = $num % 100; "{0:0000}{1:00}{2:00}" -f $date.Year,$date.Month,$day }
 function ConvertFrom-BuildDate($d) { $t = Get-Date '1996-4-1'; $d = $d.ToString(); $d = Get-Date ([string]::Join("", $d[0..3] + "-" + $d[4..5] + "-" + $d[6..7])); (($d.Year - $t.Year) * 12 + $d.Month - $t.Month) * 100 + $d.Day }
 
