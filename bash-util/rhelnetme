@@ -1,19 +1,4 @@
 #!/bin/bash
 
-containerdescription="${containerdescription:-net container}"
-PS1="\[\e[0;93m\]## ($containerdescription) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
-PS2="\[\e[0;93m\]#>\[\e[0m\] "
-
-docker run \
-	-it --rm \
-	-u="$(id -u):$(id -g)" \
-	-e HOME=/work/.rhelhome \
-	-e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
-	$netargs \
-	-e "PS1=$PS1" \
-	-e "PS2=$PS2" \
-	-v $(pwd):/work:Z \
-	-w /work \
-	microsoft/dotnet-buildtools-prereqs:rhel7_prereqs_2 \
-	bash
+rhelme --network "$@"
 

@@ -1,0 +1,65 @@
+#!/bin/bash
+
+usage() {
+  echo "You didn't use this right."
+}
+
+net=
+
+while :; do
+  if [ $# -le 0 ]; then
+      break
+  fi
+
+  lowerI="$(echo $1 | awk '{print tolower($0)}')"
+  case $lowerI in
+    -?|-h|--help)
+      usage
+      exit 0
+      ;;
+    --image)
+      image=$2
+      shift
+      ;;
+    --network)
+      netargs=''
+      net=1
+      ;;
+    --description)
+      description=$2
+      shift
+      ;;
+    *)
+      echo "Unrecognized argument '$1'"
+      usage
+      exit 1
+      ;;
+  esac
+
+  shift
+done
+
+description=${description:-container${net:+ networking on}}
+
+netargs='--network none'
+if [ "$netargs" ]
+then
+  netargs=''
+fi
+
+PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
+PS2="\[\e[0;93m\]#>\[\e[0m\] "
+
+docker run \
+  -it --rm \
+  -u="$(id -u):$(id -g)" \
+  -e HOME=/work/.rhelhome \
+  -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
+  $netargs \
+  -e "PS1=$PS1" \
+  -e "PS2=$PS2" \
+  -v $(pwd):/work:z \
+  -w /work \
+  microsoft/dotnet-buildtools-prereqs:rhel7_prereqs_2 \
+  bash
+

@@ -1,6 +1,4 @@
 #!/bin/bash
 
-export netargs='--network none'
-export containerdescription='offline container'
-rhelnetme
+containerizeme --image microsoft/dotnet-buildtools-prereqs:rhel7_prereqs_2 "$@"
 
