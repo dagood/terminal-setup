@@ -39,6 +39,12 @@ while :; do
   shift
 done
 
+if [ ! "$image" ]
+then
+  echo "No image set."
+  exit 1
+fi
+
 description=${description:-container${net:+ networking on}}
 
 netargs='--network none'
@@ -60,6 +66,6 @@ docker run \
   -e "PS2=$PS2" \
   -v $(pwd):/work:z \
   -w /work \
-  microsoft/dotnet-buildtools-prereqs:rhel7_prereqs_2 \
+  "$image" \
   bash
 
