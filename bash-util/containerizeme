@@ -6,7 +6,6 @@ usage() {
 
 net=
 customcommand=
-set -x
 
 while :; do
   if [ $# -le 0 ]; then
