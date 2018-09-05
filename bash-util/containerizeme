@@ -5,6 +5,8 @@ usage() {
 }
 
 net=
+customcommand=
+set -x
 
 while :; do
   if [ $# -le 0 ]; then
@@ -13,9 +15,15 @@ while :; do
 
   lowerI="$(echo $1 | awk '{print tolower($0)}')"
   case $lowerI in
-    -?|-h|--help)
+    -h|--help)
       usage
       exit 0
+      ;;
+    --)
+      # Interpret remaining args as the command to run.
+      customcommand=1
+      shift
+      break
       ;;
     --image)
       image=$2
@@ -56,16 +64,25 @@ fi
 PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
 PS2="\[\e[0;93m\]#>\[\e[0m\] "
 
-docker run \
-  -it --rm \
-  -u="$(id -u):$(id -g)" \
-  -e HOME=/work/.rhelhome \
-  -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
-  $netargs \
-  -e "PS1=$PS1" \
-  -e "PS2=$PS2" \
-  -v $(pwd):/work:z \
-  -w /work \
-  "$image" \
-  bash
+run() {
+  docker run \
+    -it --rm \
+    -u="$(id -u):$(id -g)" \
+    -e HOME=/work/.rhelhome \
+    -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
+    $netargs \
+    -e "PS1=$PS1" \
+    -e "PS2=$PS2" \
+    -v $(pwd):/work:z \
+    -w /work \
+    "$image" \
+    "$@"
+}
+
+if [ "$customcommand" ]
+then
+  run "$@"
+else
+  run bash
+fi
 
