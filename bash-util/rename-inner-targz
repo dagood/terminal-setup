@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -u
+
+tar=$1
+target=$2
+
+first=$(tar -ztf "$tar" | head -1)
+inner=${first%%/*}
+
+abortIfExists() {
+  if [ -a "$1" ]
+  then
+    echo "Aborting: file exists: $1"
+    exit 1
+  fi
+}
+
+abortIfExists "$inner"
+abortIfExists "$target"
+abortIfExists "$target.tar.gz"
+
+set -x
+
+tar -xf "$tar"
+mv "$inner" "$target"
+tar --numeric-owner -zcf "$target.tar.gz" "$target"
+rm -rf "$target"
