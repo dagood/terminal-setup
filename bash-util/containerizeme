@@ -29,7 +29,6 @@ while :; do
       shift
       ;;
     --network)
-      netargs=''
       net=1
       ;;
     --description)
@@ -55,7 +54,7 @@ fi
 description=${description:-container${net:+ networking on}}
 
 netargs='--network none'
-if [ "$netargs" ]
+if [ "$net" ]
 then
   netargs=''
 fi
