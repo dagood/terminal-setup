@@ -24,8 +24,9 @@ function ConvertTo-CentralTime($t)
 
 function Retry-AzDO($num)
 {
-    $cred = Get-Credential -UserName UsernameDoesNotMatter -Message 'Insert dnceng AzDO PAT for password:'
     $url = "https://dev.azure.com/dnceng/public/_apis/build/builds/$($num)?api-version=5.0-preview.4&retry=true"
+    Write-Output "PATCHing: $url"
+    $cred = Get-Credential -UserName UsernameDoesNotMatter -Message 'Insert dnceng AzDO PAT for password:'
     Invoke-WebRequest -Credential $cred -Method PATCH $url
 }
 
