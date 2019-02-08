@@ -10,7 +10,7 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
 
 :root {
     /** Width of the lines **/
-    --tree-width: 3px;
+    --tree-width: 1px;
     /** Opacity of the lines whilst not hovered **/
     --tree-opacity: 1;
     /** Opacity of the lines on hover **/
@@ -35,8 +35,8 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
     opacity: var(--tree-opacity);
     position: absolute;
     width: 0px;
-    top: -2px;
-    height: 110%;
+    top: -10px;
+    height: 100%;
     transition: opacity 0.1s linear;
     border-left: 1.5px solid var(--tree-color);
   }
@@ -50,7 +50,7 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
     height: 0px;
     top: 50%;
     transition: opacity 0.1s linear;
-    border-top: 1px solid var(--tree-color);
+    border-top: 1.5px solid var(--tree-color);
   }
   
   .explorer-folders-view:hover .monaco-list-row:before,
@@ -88,18 +88,18 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
   .explorer-folders-view .monaco-list-row[aria-level="14"] { padding-left: 260px !important; }
   .explorer-folders-view .monaco-list-row[aria-level="15"] { padding-left: 280px !important; }
   
-  .explorer-folders-view .monaco-list-row[aria-level="1"]:before, .monaco-list-row[aria-level="1"]:after { display: none; }
-  .explorer-folders-view .monaco-list-row[aria-level="2"]:before, .monaco-list-row[aria-level="2"]:after { left: calc(-30px + (2 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="3"]:before, .monaco-list-row[aria-level="3"]:after { left: calc(-30px + (3 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="4"]:before, .monaco-list-row[aria-level="4"]:after { left: calc(-30px + (4 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="5"]:before, .monaco-list-row[aria-level="5"]:after { left: calc(-30px + (5 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="6"]:before, .monaco-list-row[aria-level="6"]:after { left: calc(-30px + (6 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="7"]:before, .monaco-list-row[aria-level="7"]:after { left: calc(-30px + (7 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="8"]:before, .monaco-list-row[aria-level="8"]:after { left: calc(-30px + (8 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="9"]:before, .monaco-list-row[aria-level="9"]:after { left: calc(-30px + (9 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="10"]:before, .monaco-list-row[aria-level="10"]:after{ left: calc(-30px + (10 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="11"]:before, .monaco-list-row[aria-level="11"]:after{ left: calc(-30px + (11 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="12"]:before, .monaco-list-row[aria-level="12"]:after{ left: calc(-30px + (12 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="13"]:before, .monaco-list-row[aria-level="13"]:after{ left: calc(-30px + (13 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="14"]:before, .monaco-list-row[aria-level="14"]:after{ left: calc(-30px + (14 * 20px)); margin-left: 3px }
-  .explorer-folders-view .monaco-list-row[aria-level="15"]:before, .monaco-list-row[aria-level="15"]:after{ left: calc(-30px + (15 * 20px)); margin-left: 3px }
+  .explorer-folders-view .monaco-list-row[aria-level="1"]:before,  .monaco-list-row[aria-level="1"]:after { display: none; }
+  .explorer-folders-view .monaco-list-row[aria-level="2"]:before,  .monaco-list-row[aria-level="2"]:after { left: calc(-30px + (2  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="3"]:before,  .monaco-list-row[aria-level="3"]:after { left: calc(-30px + (3  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="4"]:before,  .monaco-list-row[aria-level="4"]:after { left: calc(-30px + (4  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="5"]:before,  .monaco-list-row[aria-level="5"]:after { left: calc(-30px + (5  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="6"]:before,  .monaco-list-row[aria-level="6"]:after { left: calc(-30px + (6  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="7"]:before,  .monaco-list-row[aria-level="7"]:after { left: calc(-30px + (7  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="8"]:before,  .monaco-list-row[aria-level="8"]:after { left: calc(-30px + (8  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="9"]:before,  .monaco-list-row[aria-level="9"]:after { left: calc(-30px + (9  * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="10"]:before, .monaco-list-row[aria-level="10"]:after{ left: calc(-30px + (10 * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="11"]:before, .monaco-list-row[aria-level="11"]:after{ left: calc(-30px + (11 * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="12"]:before, .monaco-list-row[aria-level="12"]:after{ left: calc(-30px + (12 * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="13"]:before, .monaco-list-row[aria-level="13"]:after{ left: calc(-30px + (13 * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="14"]:before, .monaco-list-row[aria-level="14"]:after{ left: calc(-30px + (14 * 20px)); margin-left: 8px }
+  .explorer-folders-view .monaco-list-row[aria-level="15"]:before, .monaco-list-row[aria-level="15"]:after{ left: calc(-30px + (15 * 20px)); margin-left: 8px }
