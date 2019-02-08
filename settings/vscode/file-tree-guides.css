@@ -16,7 +16,8 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
     /** Opacity of the lines on hover **/
     --tree-opacity-hover: 1;
     /** Color of the lines **/
-    --tree-color: rgb(51, 51, 51);
+    /* --tree-color: rgb(51, 51, 51); */
+    --tree-color: rgb(204, 204, 204);
   }
   
   .explorer-folders-view .monaco-tl-twistie {
@@ -37,7 +38,7 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
     top: -2px;
     height: 110%;
     transition: opacity 0.1s linear;
-    border-left: 3px solid var(--tree-color);
+    border-left: 1.5px solid var(--tree-color);
   }
   
   .explorer-folders-view .monaco-list-row:after {
