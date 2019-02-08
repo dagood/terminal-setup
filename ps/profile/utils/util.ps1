@@ -6,6 +6,13 @@ function Diff-Time($a, $b)
     $a - $b
 }
 
+function Get-VersionInfo($path)
+{
+    $i = (gi $path)
+    Write-Host "ProductVersion: $($i.VersionInfo.ProductVersion)"
+    return $i.VersionInfo
+}
+
 function ConvertTo-PacificTime($t)
 {
     [System.TimeZoneInfo]::ConvertTime(
