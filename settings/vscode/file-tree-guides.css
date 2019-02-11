@@ -39,6 +39,8 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
     height: 100%;
     transition: opacity 0.1s linear;
     border-left: 1.5px solid var(--tree-color);
+    /* When a row is selected, it sets its background color. Make sure the guides are always above the selected row. */
+    z-index: 5;
   }
   
   .explorer-folders-view .monaco-list-row:after {
