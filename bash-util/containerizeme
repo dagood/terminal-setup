@@ -4,12 +4,12 @@ usage() {
   echo "Run something in a container, volume-mapped to the current directory."
   echo ""
   echo "--image [image]       Image to use."
-  echo "--net                 Enables networking."
+  echo "--offline             Disables networking."
   echo "--description [desc]  Adds a custom description."
   echo "-- [args...]          What to run in container. Default: bash shell."
 }
 
-net=
+offline=
 customcommand=
 
 while :; do
@@ -33,8 +33,8 @@ while :; do
       image=$2
       shift
       ;;
-    --net)
-      net=1
+    --offline)
+      offline=1
       ;;
     --description)
       description=$2
@@ -58,10 +58,10 @@ fi
 
 description=${description:-container${net:+ networking on}}
 
-netargs='--network none'
-if [ "$net" ]
+netargs=''
+if [ "$offline" ]
 then
-  netargs=''
+  netargs='--network none'
 fi
 
 PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
