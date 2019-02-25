@@ -1,7 +1,12 @@
 #!/bin/bash
 
 usage() {
-  echo "You didn't use this right."
+  echo "Run something in a container, volume-mapped to the current directory."
+  echo ""
+  echo "--image [image]       Image to use."
+  echo "--net                 Enables networking."
+  echo "--description [desc]  Adds a custom description."
+  echo "-- [args...]          What to run in container. Default: bash shell."
 }
 
 net=
@@ -28,7 +33,7 @@ while :; do
       image=$2
       shift
       ;;
-    --network)
+    --net)
       net=1
       ;;
     --description)

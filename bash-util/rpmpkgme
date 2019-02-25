@@ -1,0 +1,4 @@
+#!/bin/bash
+
+containerizeme --image microsoft/dotnet-buildtools-prereqs:rhel-7-rpmpkg-c982313-20174116044113 "$@"
+
