@@ -126,3 +126,62 @@ function Redact-History
         echo "Done."
     }
 }
+
+function Compare-Nupkgs(
+    [Parameter(Mandatory=$true)] $bDir,
+    $removeVersions = $true)
+{
+    $aDir = '.'
+    $kdiffPath = "C:\tools\KDiff3\kdiff3.exe"
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    
+    function Extract($dir, $target)
+    {
+        rm -erroraction ignore -recurse -force $target
+        $fs = (ls "$dir\*.nupkg" -Exclude "*.symbols.nupkg")
+        $i = 0
+        Write-Host "Extracting '$dir' nupkgs..."
+        foreach ($f in $fs)
+        {
+            Write-Host "$($i++; $i) / $($fs.Count)    $f"
+            $t = "$target\$($f.BaseName)"
+            
+            if (Test-Path $t)
+            {
+                throw "Already exists (same package id?): $t"
+            }
+            
+            [System.IO.Compression.ZipFile]::ExtractToDirectory($f, $t)
+            
+            rm -erroraction ignore -recurse -force "$t\package"
+            rm -erroraction ignore -recurse -force "$t\_rels"
+            
+            if ($removeVersions)
+            {
+                $spec = (ls "$t\*.nuspec")[0]
+                if (-not $spec)
+                {
+                    throw "No nuspec? $f"
+                }
+                
+                [xml]$x = gc $spec
+                $version = $x.package.metadata.version
+                mv $t $t.Replace($version, "")
+            }
+        }
+    }
+    
+    $a = "$env:TEMP\compare\current\"
+    $b = "$env:TEMP\compare\other\"
+    
+    Extract $aDir $a
+    Extract $bDir $b
+    
+    Write-Host "Extracted into $a"
+    
+    Write-Host "current = $aDir"
+    Write-Host "other = $bDir"
+    
+    & $kdiffPath "$a" "$b"
+}
