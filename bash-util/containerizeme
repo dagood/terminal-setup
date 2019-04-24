@@ -9,6 +9,7 @@ usage() {
   echo "-- [args...]          What to run in container. Default: bash shell."
 }
 
+root=
 offline=
 customcommand=
 
@@ -32,6 +33,9 @@ while :; do
     --image)
       image=$2
       shift
+      ;;
+    --root)
+      root=1
       ;;
     --offline)
       offline=1
@@ -64,14 +68,22 @@ then
   netargs='--network none'
 fi
 
+idargs=-u="$(id -u):$(id -g)"
+homeargs=-e HOME=/work/.rhelhome
+if [ "$root" ]
+then
+  idargs=
+  homeargs=
+fi
+
 PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
 PS2="\[\e[0;93m\]#>\[\e[0m\] "
 
 run() {
   docker run \
     -it --rm \
-    -u="$(id -u):$(id -g)" \
-    -e HOME=/work/.rhelhome \
+    $idargs \
+    $homeargs \
     -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
     $netargs \
     -e "PS1=$PS1" \
