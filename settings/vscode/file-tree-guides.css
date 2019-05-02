@@ -7,20 +7,18 @@ VS Code issue: https://github.com/Microsoft/vscode/issues/17777
 Also some random style that I like.
 */
 
-.monaco-icon-label>.monaco-icon-label-description-container>.label-description {
-  opacity: .3;
-}
-
 .explorer-open-editors .monaco-icon-label>.monaco-icon-label-description-container>.label-name {
   /* background: rgba(0, 0, 0, 0.12); */
   padding: 2px;
   /* border-right: #1d1d1d 1px solid;
   border-bottom: #1b1b1b 1px solid; */
+  color: #ffffff;
 }
 
 .explorer-viewlet .explorer-open-editors .monaco-list .monaco-list-row.selected {
   background-color: #324250;
   border-right: #ffb900 2px solid;
+  border-left: #ffb900 2px solid;
 }
 
 /* Source: https://gist.github.com/jakewtaylor/e92acd697409e53a73ebf8e0145d4c28 */
