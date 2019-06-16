@@ -129,7 +129,9 @@ function Redact-History
 
 function Compare-Nupkgs(
     [Parameter(Mandatory=$true)] $bDir,
-    $removeVersions = $true)
+    $removeVersions = $true,
+    $removeNuspec = $false,
+    $removeVersionFile = $false)
 {
     $aDir = '.'
     $kdiffPath = "C:\tools\KDiff3\kdiff3.exe"
@@ -167,8 +169,19 @@ function Compare-Nupkgs(
                 
                 [xml]$x = gc $spec
                 $version = $x.package.metadata.version
-                mv $t $t.Replace($version, "")
+                cp -Recurse $t $t.Replace($version, "")
+                rm -Recurse -Force $t
+                $t = $t.Replace($version, "")
             }
+            if ($removeNuspec)
+            {
+                (ls "$t\*.nuspec") | rm
+            }
+            if ($removeVersionFile)
+            {
+                (ls "$t\*.versions.txt") | rm
+            }
+            (ls "$t\[Content_Types].xml") | rm
         }
     }
     
