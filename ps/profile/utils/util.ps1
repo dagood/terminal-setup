@@ -198,3 +198,20 @@ function Compare-Nupkgs(
     
     & $kdiffPath "$a" "$b"
 }
+
+function Monitor-RemoteBinlog([Parameter(Mandatory=$true)] $remote)
+{
+    while($true)
+    {
+        $last = get-date
+        echo "Fetching $remote..."
+        pscp $remote $env:TEMP\temp.binlog
+        start -wait $env:TEMP\temp.binlog
+
+        if (((get-date) - $last).TotalSeconds -lt 30)
+        {
+            echo "Binlog closed very quickly: halting."
+            break
+        }
+    }
+}
