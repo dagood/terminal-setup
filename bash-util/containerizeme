@@ -80,6 +80,7 @@ PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]
 PS2="\[\e[0;93m\]#>\[\e[0m\] "
 
 run() {
+  set -x
   docker run \
     -it --rm \
     $idargs \
