@@ -6,17 +6,22 @@
     "editor.renderWhitespace": "boundary",
 
     "files.associations": {
-        "*.props": "xml",
         "*.msbuild": "xml",
+        "*.depproj": "xml",
+        "*.pkgproj": "xml",
+        "*.sfxproj": "xml",
+        "*.bundleproj": "xml",
+        "*.builds": "xml",
         "*.proj": "xml",
-        "*.json": "jsonc"
+        "*.props": "xml",
+        "*.targets": "xml",
+        "*.json": "jsonc",
+        "NuGet.config": "xml"
     },
 
     "powershell.integratedConsole.showOnStartup": false,
 
-    "git.enabled": false,
-
-    "rewrap.wrappingColumn": 80,
+    // "git.enabled": false,
 
     "vim.handleKeys": {
         "<C-a>": false,
@@ -52,6 +57,56 @@
     "hexdump.uppercase": false,
 
     "problems.decorations.enabled": false,
-    "window.titleBarStyle": "custom",
-    "window.newWindowDimensions": "inherit"
+    "window.newWindowDimensions": "inherit",
+    "editor.autoClosingQuotes": "never",
+
+    "explorer.confirmDragAndDrop": false,
+    "breadcrumbs.enabled": true,
+    "extensions.ignoreRecommendations": true,
+
+    "[xml]": {
+        "editor.tabSize": 2
+    },
+    "window.enableMenuBarMnemonics": false,
+    "explorer.openEditors.visible": 15,
+    "workbench.sideBar.location": "left",
+    "workbench.activityBar.visible": false,
+    "activitusbar.alignment": "Right",
+    "activitusbar.priority": -99999,
+    "activitusbar.searchViewInPanel": false,
+
+    "cSpell.userWords": [
+        "Nuget",
+        "Recurse",
+        "Repo",
+        "aspnetcore",
+        "binlog",
+        "msbuild",
+        "netcoreapp"
+    ],
+    "cSpell.showStatus": true,
+
+    "gitlens.views.repositories.enabled": false,
+    "gitlens.settings.mode": "advanced",
+    "gitlens.blame.highlight.locations": [
+        "gutter",
+        "overview",
+        "line"
+    ],
+    "gitlens.codeLens.scopes": [
+        "document",
+        "containers"
+    ],
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.command": "gitlens.toggleFileBlame",
+    "gitlens.statusBar.reduceFlicker": true,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.currentLine.enabled": false,
+    "gitlens.statusBar.alignment": "left",
+    "gitlens.hovers.currentLine.enabled": false,
+    "gitlens.heatmap.hotColor": "#f66a0a",
+    "gitlens.heatmap.coldColor": "#0a60f6",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.tree.indent": 12
 }
