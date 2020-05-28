@@ -1,5 +1,5 @@
 {
-    "editor.fontSize": 11,
+    "editor.fontSize": 12,
     "editor.rulers": [80,100],
     "window.zoomLevel": 0,
     "editor.renderIndentGuides": true,
@@ -108,5 +108,11 @@
     "gitlens.heatmap.coldColor": "#0a60f6",
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "workbench.tree.renderIndentGuides": "always",
-    "workbench.tree.indent": 12
+    "workbench.tree.indent": 12,
+
+    "graphvizPreview.dotPath": "C:\\tools\\graphviz\\2.38\\bin\\dot.exe",
+    "remote.SSH.remotePlatform": {
+        "box": "linux"
+    },
+    "editor.minimap.maxColumn": 80
 }
