@@ -86,6 +86,11 @@ run() {
     $idargs \
     $homeargs \
     -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
+    -e VSS_NUGET_EXTERNAL_FEED_ENDPOINTS \
+    -e NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED \
+    -e internalPackageFeedPat \
+    -e GIT_COMMITTER_NAME=container \
+    -e GIT_COMMITTER_EMAIL=container@example.org \
     $netargs \
     -e "PS1=$PS1" \
     -e "PS2=$PS2" \
