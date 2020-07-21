@@ -69,7 +69,7 @@ then
 fi
 
 idargs=-u="$(id -u):$(id -g)"
-homeargs='-e HOME=/work/.rhelhome'
+homeargs='-e HOME=/work/.container-home'
 if [ "$root" ]
 then
   idargs=
