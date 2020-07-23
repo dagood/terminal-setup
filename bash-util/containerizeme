@@ -91,6 +91,8 @@ run() {
     -e internalPackageFeedPat \
     -e GIT_COMMITTER_NAME=container \
     -e GIT_COMMITTER_EMAIL=container@example.org \
+    -e GIT_AUTHOR_NAME=container \
+    -e GIT_AUTHOR_EMAIL=container@example.org \
     $netargs \
     -e "PS1=$PS1" \
     -e "PS2=$PS2" \
