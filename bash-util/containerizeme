@@ -12,6 +12,7 @@ usage() {
 root=
 offline=
 customcommand=
+memory=
 
 while :; do
   if [ $# -le 0 ]; then
@@ -42,6 +43,10 @@ while :; do
       ;;
     --description)
       description=$2
+      shift
+      ;;
+    --memory)
+      memory=$2
       shift
       ;;
     *)
@@ -76,6 +81,12 @@ then
   homeargs=
 fi
 
+memargs=''
+if [ "$memory" ]
+then
+  memargs="--memory $memory"
+fi
+
 PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
 PS2="\[\e[0;93m\]#>\[\e[0m\] "
 
@@ -94,6 +105,7 @@ run() {
     -e GIT_AUTHOR_NAME=container \
     -e GIT_AUTHOR_EMAIL=container@example.org \
     $netargs \
+    $memargs \
     -e "PS1=$PS1" \
     -e "PS2=$PS2" \
     -v $(pwd):/work:z \
