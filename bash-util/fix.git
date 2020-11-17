@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+echo "Fixing .git in $(pwd)..."
+[ -e '.git' ] || { echo ".git not found"; exit 1; }
+
+sed -e 's/\/work\/.git/..\/..\/..\/.git/' -i .git
+
+echo "Done:"
+cat .git
+echo
+
