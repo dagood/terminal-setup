@@ -1,11 +1,12 @@
 #!/bin/env bash
 
-echo "Fixing .git in $(pwd)..."
-[ -e '.git' ] || { echo ".git not found"; exit 1; }
+echo "Finding .git files in $(pwd)..."
 
-sed -e 's/\/work\/.git/..\/..\/..\/.git/' -i .git
+for x in $(find . -type f -name .git)
+do
+  sed -e 's/\/work\/.git/..\/..\/..\/.git/' -i "$x"
+  echo "Processed $x: $(cat $x)"
+done
 
-echo "Done:"
-cat .git
-echo
+echo "Done."
 
