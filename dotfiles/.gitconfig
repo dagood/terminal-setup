@@ -1,3 +1,9 @@
 [user]
 	email = dagood@microsoft.com
 	name = Davis Goodin
+[submodule]
+	fetchjobs = 8
+[core]
+	excludesfile = /home/dagood/.gitignore_global
+[alias]
+	fa = fetch --all -p
