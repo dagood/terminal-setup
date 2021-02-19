@@ -1,0 +1,4 @@
+#!/bin/bash
+
+containerizeme --image mcr.microsoft.com/dotnet-buildtools/prereqs:fedora-32-20200804015007-163ed2a "$@"
+
