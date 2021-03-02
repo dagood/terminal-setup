@@ -103,9 +103,10 @@ fi
 addusercommand=
 if [ "$adduser" ]
 then
+  homeargs='-e HOME=/work/.container-home'
   addusercommand="
     addgroup --gid $(id -g) buildergroup
-    adduser --home /work/.container-home --uid $(id -u) --gid $(id -g) --gecos '' --disabled-password builder
+    adduser --home /work/.container-home --uid $(id -u) --gid $(id -g) --gecos '' --disabled-password --no-create-home builder
     sudo -u builder "
 fi
 
@@ -140,7 +141,8 @@ if [ "$customcommand" ]
 then
   if [ "$bash" ]
   then
-    run bash -c "$addusercommand$@"
+    fullcommand="$addusercommand$@"
+    run bash -c "$fullcommand"
   else
     run "$@"
   fi
