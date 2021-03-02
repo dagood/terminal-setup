@@ -4,12 +4,17 @@ usage() {
   echo "Run something in a container, volume-mapped to the current directory."
   echo ""
   echo "--image [image]       Image to use."
+  echo "--root                Runs as root user (omits '-u' arg)"
+  echo "--bash                Runs the provided command as a '-c' parameter to a bash command."
+  echo "--adduser             Adds a user inside the container with the same id/gid as the host user. Infers '--bash', '--root'."
   echo "--offline             Disables networking."
   echo "--description [desc]  Adds a custom description."
   echo "-- [args...]          What to run in container. Default: bash shell."
 }
 
 root=
+bash=
+adduser=
 offline=
 customcommand=
 memory=
@@ -36,6 +41,14 @@ while :; do
       shift
       ;;
     --root)
+      root=1
+      ;;
+    --bash)
+      bash=1
+      ;;
+    --adduser)
+      adduser=1
+      bash=1
       root=1
       ;;
     --offline)
@@ -87,6 +100,15 @@ then
   memargs="--memory $memory"
 fi
 
+addusercommand=
+if [ "$adduser" ]
+then
+  addusercommand="
+    addgroup --gid $(id -g) buildergroup
+    adduser --home /work/.container-home --uid $(id -u) --gid $(id -g) --gecos '' --disabled-password builder
+    sudo -u builder "
+fi
+
 PS1="\[\e[0;93m\]## ($description) \u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[0;93m\]\n#> \[\e[m\]"
 PS2="\[\e[0;93m\]#>\[\e[0m\] "
 
@@ -116,8 +138,13 @@ run() {
 
 if [ "$customcommand" ]
 then
-  run "$@"
+  if [ "$bash" ]
+  then
+    run bash -c "$addusercommand$@"
+  else
+    run "$@"
+  fi
 else
-  run bash
+  run bash -c "${addusercommand}bash"
 fi
 

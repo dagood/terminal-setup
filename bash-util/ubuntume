@@ -1,0 +1,3 @@
+#!/bin/bash
+
+containerizeme --image mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-18.04-20210223192210-047508b "$@"
