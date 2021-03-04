@@ -7,6 +7,7 @@ usage() {
   echo "--root                Runs as root user (omits '-u' arg)"
   echo "--bash                Runs the provided command as a '-c' parameter to a bash command."
   echo "--adduser             Adds a user inside the container with the same id/gid as the host user. Infers '--bash', '--root'."
+  echo "--homehome            Map a HOME directory in host user's HOME, not inside the main workspace."
   echo "--offline             Disables networking."
   echo "--description [desc]  Adds a custom description."
   echo "-- [args...]          What to run in container. Default: bash shell."
@@ -15,6 +16,7 @@ usage() {
 root=
 bash=
 adduser=
+homehome=
 offline=
 customcommand=
 memory=
@@ -51,6 +53,9 @@ while :; do
       bash=1
       root=1
       ;;
+    --homehome)
+      homehome=1
+      ;;
     --offline)
       offline=1
       ;;
@@ -86,8 +91,19 @@ then
   netargs='--network none'
 fi
 
+innerhome=/work/.container-home
+innerhomemap=
+if [ "$homehome" ]
+then
+  outerhome="$HOME/.container-home-shared/"
+  mkdir -p "$outerhome" | :
+
+  innerhome="/home-shared/"
+  innerhomemap="-v $outerhome:$innerhome:z"
+fi
+
 idargs=-u="$(id -u):$(id -g)"
-homeargs='-e HOME=/work/.container-home'
+homeargs="-e HOME=$innerhome"
 if [ "$root" ]
 then
   idargs=
@@ -119,6 +135,7 @@ run() {
     -it --rm \
     $idargs \
     $homeargs \
+    $innerhomemap \
     -e SOURCE_BUILD_SKIP_SUBMODULE_CHECK \
     -e VSS_NUGET_EXTERNAL_FEED_ENDPOINTS \
     -e NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED \
